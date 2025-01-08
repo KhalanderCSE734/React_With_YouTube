@@ -1,0 +1,163 @@
+@media (min-width:1100px) and (max-width:1230px){
+    .main-video{
+        .about-video{
+            .about-video-right{
+                column-gap: 5px;
+                .horizontal-dot{
+                    display:none;
+                }
+                .download{
+                    padding:.5rem 1.1rem;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width:1100px){
+    .video-container{
+        flex-direction: column;
+        align-items: center;
+        row-gap:20px;
+    }
+    .main-video{
+        width:90%;
+    }
+    .suggestion-videos{
+        width:90%;
+    }
+    .thumbnail-container{
+        img{
+            width:25%;
+            height:130px;
+        }
+    }
+}
+
+
+@media (max-width:900px){
+    .main-video{
+        .about-video{
+            height:140px;
+            margin:20px 0;
+            flex-direction:column;
+            align-items: flex-start;
+        }
+    }
+    .main-comment{
+        .like{
+            width:40%;
+        }
+    }
+    .main-video .comments-section .your-comment{    
+        img{
+            height:40px;
+            width:40px;
+        }
+        .input{
+           width:70%;
+        }
+        button{
+            padding:8px 9px;
+            font-size:.8rem;
+        }
+    }
+    .thumbnail-container{
+        justify-content: flex-start;
+        column-gap:20px;
+        img{
+            width:30%;
+            height:110px;
+        }
+    }
+    .main-video iframe{
+        height:500px;
+    }
+}
+
+@media (max-width:600px){
+    .main-video{
+        .about-video{
+            .about-video-right{
+                width:100%;
+                .like-section{
+                    font-size:1rem;
+                    padding:8px 10px;
+                    column-gap:20px;
+                }
+                .share{
+                    padding:8px 10px;
+                    font-size:1rem;
+                    column-gap:10px;
+                }
+                .download{
+                    padding:8px 10px;
+                    font-size:1rem;
+                }
+                .horizontal-dot{
+                    display:none;
+                }
+            }
+        }
+    }
+    .thumbnail-container{
+        flex-direction: column;
+        row-gap:10px;
+        img{
+            height:250px;
+            width:100%;
+        }
+        .desc{
+            width:100%;
+            h2{
+                font-size:1.1rem;
+            }
+            p{
+                font-size:1rem;
+            }
+        }
+    }
+    .main-video iframe{
+        height:350px;
+    }
+}
+@media (max-width:400px){
+    .main-video .about-video{
+        height:120px;
+        .about-video-left{
+            button{
+                font-size:.9rem;
+                padding:8px 10px;
+            }
+        }
+        .about-video-right{
+            .like-section,.share,.download{
+                font-size:.9rem;
+                padding:5px 6px;
+                column-gap:10px;
+            }
+        }
+    }
+    .main-comment .like{
+        width:60%;
+    }
+    .thumbnail-container{
+        img{
+            height:170px;
+            width:100%;
+        }
+        .desc{
+            width:100%;
+            h2{
+                font-size:.95rem;
+            }
+            p{
+                font-size:.8rem;
+            }
+        }
+    }
+    .main-video iframe{
+        height:350px;
+    }
+}

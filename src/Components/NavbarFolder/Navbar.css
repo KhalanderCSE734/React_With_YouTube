@@ -1,0 +1,123 @@
+nav{
+    height:75px;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.first{
+    width:25%;
+    height:100%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    .bars{
+        font-size:1.5rem;
+        color:white;
+        cursor:pointer;
+    }
+    .logo{
+        height:100%;
+        width:75%;
+        img{
+            height: 100%;
+            width:55%;
+            cursor:pointer;
+        }
+    }
+}
+.middle{
+    width:45%;
+    height:80%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color:orange; */
+    .search{
+        width:90%;
+        height:80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color:#222222;
+        border-radius:3rem;
+        input{
+            width:90%;
+            height:90%;
+            background-color:#121212;
+            border-top-left-radius: 3rem;
+            border-bottom-left-radius: 3rem;
+            padding-left:15px;
+            margin-left:2px;
+            color:white;
+            &:focus{
+                outline-color:rgb(0, 0, 231);
+            }
+        }
+        .search-icon{
+            width:10%;
+            display: grid;
+            place-items: center;
+            color:#FFFFFF;
+            font-size:1.5rem;
+            cursor: pointer;
+        }        
+    }
+    .voice{
+        height:80%;
+        width:7%; 
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background-color:#272727;
+        color:#FFFFFF;
+        font-size:1.5rem;
+        cursor: pointer;
+
+    }
+
+}
+
+.last{
+    width:20%;
+    height:100%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color:white;
+    .upload{
+        height:55%;
+        width:40%;
+        display:flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color:#272727;
+        border-radius:3rem;
+        font-weight: bolder;
+        cursor:pointer;
+        .video{
+            font-size:1.6rem;
+        }
+        .text{
+            padding-bottom:2px;
+            font-size:1.1rem;
+        }
+    }
+    .notification{
+        font-size:1.5rem;
+        cursor:pointer;
+    }
+    .profile{
+        height:45px;
+        width:45px;
+        border-radius: 50%;
+        cursor:pointer;
+        img{
+            height:100%;
+            width:100%;
+            border-radius:50%;
+        }
+    }
+}
+

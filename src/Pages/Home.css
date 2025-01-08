@@ -1,0 +1,8 @@
+.my-container{
+    height:calc(100vh - 75px);
+    width:100%;
+    display:flex;
+    column-gap: 10px;
+    position: relative;
+}
+

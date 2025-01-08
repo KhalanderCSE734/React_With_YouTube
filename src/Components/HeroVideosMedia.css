@@ -1,0 +1,21 @@
+@media (min-width:800px) and (max-width:1200px){
+    .hero-section{
+        width: 100%;
+        grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    }
+}
+
+@media (min-width:400px) and (max-width:800px){
+    .hero-section{
+        width: 100%;
+        grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    }
+}
+
+@media (max-width:400px){
+    .hero-section{
+        width: 100%;
+        padding:5px;
+        grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+    }
+}
