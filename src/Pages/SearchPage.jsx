@@ -27,7 +27,7 @@ const SearchPage = () => {
   }
 
   useEffect(()=>{ 
-    // getVideos();
+    getVideos();
   },[]);
 
   useEffect(()=>{ 
