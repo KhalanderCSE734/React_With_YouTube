@@ -65,12 +65,12 @@ const Video = () => {
       const response = await fetch(commentURL);
       const responseData = await response.json();
       // console.log("Comment Details \n",responseData); 
-      console.log("Comment Details \n",responseData.items); 
+      // console.log("Comment Details \n",responseData.items); 
       // setComment(responseData);
       // setComment(responseData.items);
       setComment((prev)=>{ return [...prev,...responseData.items] });
       const nextPageToken = responseData.nextPageToken;
-      console.log(nextPageToken);
+      // console.log(nextPageToken);
       // if(nextPageToken && comment.length<20){
       //    getComments(nextPageToken);
       // }
@@ -131,7 +131,7 @@ const Video = () => {
 
 
   useEffect(()=>{ 
-    console.log(suggestion);
+    // console.log(suggestion);
   },[suggestion]);
 
   useEffect(()=>{

@@ -13,6 +13,8 @@ import './NavbarMedia.css';
 //                                          React components and Contexts
 import { WrapContext } from "../../App";
 
+
+
 /*
             <div className="video">
              <MdOutlineMissedVideoCall />
@@ -45,6 +47,7 @@ const Navbar = ()=>{
 
 
     const goHome = useNavigate();
+    const goSearch = useNavigate();
 
     const value = useContext(WrapContext);
     // console.log(value);
@@ -55,7 +58,13 @@ const Navbar = ()=>{
     }
     //                              Submit option
     const handleSubmit = (evt)=>{
+        // console.log("Query Searched");
         evt.preventDefault();
+        if((search.trim())!==""){
+            console.log(search.trim());
+            goSearch(`/search/${search.trim()}`);
+        }
+        setSearch("");
     }
 
     

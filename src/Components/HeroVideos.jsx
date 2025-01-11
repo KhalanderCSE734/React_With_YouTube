@@ -108,7 +108,7 @@ const HeroVideos = ({category,region}) => {
     // if(thumb.length>4){
     //    thumb = thumb.slice(4);
     // }
-    console.log(thumb);
+    // console.log(thumb);
     if(thumb.length>4){
       let temp = thumb.slice(4);
       setThumb(temp);

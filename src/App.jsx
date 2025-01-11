@@ -7,6 +7,8 @@ import HeroVideos from './Components/HeroVideos';
 // import Video from '.Components/VideoPage/Video';
 import Home from './Pages/Home';
 import Video from './Pages/Video';
+import SearchPage from './Pages/SearchPage';
+
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -37,6 +39,7 @@ const App = () => {
             </WrapContext.Provider>
           }/>
           <Route path="/video/:region/:categoryId/:videoId/:channelId" element={<Video/>}/>
+          <Route path="/search/:query" element={<SearchPage/>}/>
       </Routes>
 
     </>
