@@ -3,6 +3,9 @@ import { useEffect,useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 
+import './SearchPage.css';
+import './SearchPageMedia.css';
+
 const SearchPage = () => {
   const {query} = useParams();
 
@@ -27,7 +30,7 @@ const SearchPage = () => {
   }
 
   useEffect(()=>{ 
-    getVideos();
+    // getVideos();
   },[]);
 
   useEffect(()=>{ 
@@ -49,12 +52,22 @@ const SearchPage = () => {
     console.log(playlist);
   },[vidoes,playlist]);
 
+
+  let arr = [0,23,24,2,20,25,17,28,22];
+  console.log(Math.floor(Math.random()*arr.length));
   return (
     <>
-        <h2 className="text-5xl text-red-400">Your Searched Content is {query}</h2>   
+        {/* <h2 className="text-5xl text-red-400">Your Searched Content is {query}</h2>    */}
+        <div className="hero-container">
         <div className="Wrapper-box">
-          {/* <img src="" alt="" /> */}
-          <div className="desc"></div>
+          <img src="/Doraemon.png" alt="" />
+          <div className="desc">
+            <h1 className="title"> All new episodes of Doraemon</h1>
+            <p className="when"> 2 Days Ago </p>
+            <p className="title"> <img src="/Doraemon.png" alt="" /> <span>Doraemon</span> </p>
+            <p className="short-desc"> Doraemon is Started from Japan and Now It reached India So great and Everybody watch and Support</p>
+          </div>
+        </div>
         </div>
     </>
   )

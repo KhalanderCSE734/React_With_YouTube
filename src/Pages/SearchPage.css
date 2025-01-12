@@ -1,0 +1,41 @@
+.hero-container{
+    height:max-content;
+    width:100%;
+    padding:20px;
+    color:white;
+}
+
+.Wrapper-box{
+    width:100%;
+    display:flex;
+    align-items: flex-start;
+    column-gap:15px;
+    margin-bottom:20px;
+    img{
+        height:clamp(200px,15vw,250px);
+        width:clamp(300px,28vw,400px);
+        border-radius:1rem;
+    }
+}
+.desc{
+    h1{
+        color:white;
+        font-size:1.8rem;
+    }
+    p{
+        color:#AAAAAA;
+        font-size:.9rem;
+        margin-bottom:5px;
+    }
+    .title{
+        display:flex;
+        align-items: center;
+        column-gap:15px;
+            img{
+                height:25px;
+                width:25px;
+                border-radius:50px;
+            }
+    }
+}
+
