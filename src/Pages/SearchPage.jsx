@@ -1,16 +1,22 @@
 import React from 'react'
 import { useEffect,useState } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
+
+import moment from 'moment';
+
 
 import './SearchPage.css';
 import './SearchPageMedia.css';
+import Video from './Video';
+
+
 
 const SearchPage = () => {
   const {query} = useParams();
 
   const [allVideo,setAllVideos] = useState([]);
-  const [vidoes,setVideos] = useState([]);
+  const [videos,setVideos] = useState([]);
   const [playlist,setPlaylist] = useState([]);
   const [region,setRegion] = useState('');
 
@@ -30,8 +36,8 @@ const SearchPage = () => {
   }
 
   useEffect(()=>{ 
-    // getVideos();
-  },[]);
+    getVideos();
+  },[query]);
 
   useEffect(()=>{ 
     allVideo.forEach((cur)=>{
@@ -48,17 +54,35 @@ const SearchPage = () => {
   },[allVideo]);
   
   useEffect(()=>{ 
-    console.log(vidoes);
+    console.log(videos);
     console.log(playlist);
-  },[vidoes,playlist]);
+    if(videos.length>0){
+      console.log(region,videos[0].id.videoId,videos[0].snippet.channelId);
+    }
+  },[videos,playlist]);
 
 
   let arr = [0,23,24,2,20,25,17,28,22];
-  console.log(Math.floor(Math.random()*arr.length));
+  const category = Math.floor(Math.random()*arr.length);
+  if(allVideo.length<0 || (videos.length<0 && playlist.length<0)){
+    return <h1 className='text-white flex items-center justify-center text-5xl m-auto'>Loading</h1>;
+  }
   return (
     <>
-        {/* <h2 className="text-5xl text-red-400">Your Searched Content is {query}</h2>    */}
+        {/* <h2 className="text-5xl text-red-400">Your Searched Content is {query}</h2>  
+        
+        cur.snippet.thumbnails.medium.url     --> Thumbnail
+        cur.snippet.title                     -->title
+        cur.snippet.publishedAt               -->when (moments)
+        cur.snippet.channelTitle
+        cur.snippet.description.slice(0,50)
+
+        
+        */}
         <div className="hero-container">
+    {/* {
+      vidoes.map((cur,ind)=>{
+        return   <NavLink to={`/video/${region}/${Math.floor(Math.random()*arr.length)}/${cur.id.videoId}/${cur.snippet.channelId}`} key={ind}>
         <div className="Wrapper-box">
           <img src="/Doraemon.png" alt="" />
           <div className="desc">
@@ -68,6 +92,48 @@ const SearchPage = () => {
             <p className="short-desc"> Doraemon is Started from Japan and Now It reached India So great and Everybody watch and Support</p>
           </div>
         </div>
+      </NavLink>
+      })
+    } */}
+    {
+      videos.map((cur,ind)=>{
+        return   <NavLink to={`/video/${region}/${arr[category]}/${cur.id.videoId}/${cur.snippet.channelId}`} key={ind}>
+        <div className="Wrapper-box">
+          <img src={cur.snippet.thumbnails.medium.url} alt="" />
+          <div className="desc">
+            <h1 className="title"> {cur.snippet.title}</h1>
+            <p className="when"> {moment(cur.snippet.publishedAt).fromNow()} </p>
+            <p className="title"> <img src={cur.snippet.thumbnails.medium.url} alt="" /> <span>{cur.snippet.channelTitle}</span> </p>
+            <p className="short-desc">{cur.snippet.description.slice(0,50)}</p>
+          </div>
+        </div>
+      </NavLink>
+      })
+    }
+    {
+      playlist.map((cur,ind)=>{
+        return <div className="Wrapper-box" key={ind}>
+        <img src={cur.snippet.thumbnails.medium.url} alt="" />
+        <div className="desc">
+          <h1 className="title"> {cur.snippet.title} </h1>
+          <p className="title"> <span>{cur.snippet.channelTitle}</span> &#xB7; <span>Playlist</span> </p>
+          <p className="short-desc"> {cur.snippet.description.slice(0,50)}</p>
+          <p> View Full Playlist </p>
+        </div>
+      </div>
+      })
+    }
+   
+        {/* <div className="Wrapper-box">
+          <img src="/Doraemon.png" alt="" />
+          <div className="desc">
+            <h1 className="title"> All new episodes of Doraemon</h1>
+            <p className="title"> <span>Doraemon</span> &#xB7; <span>Playlist</span> </p>
+            <p className="short-desc"> Doraemon is Started from Japan and Now It reached India So great and Everybody watch and Support</p>
+            <p> View Full Playlist </p>
+          </div>
+        </div> */}
+
         </div>
     </>
   )

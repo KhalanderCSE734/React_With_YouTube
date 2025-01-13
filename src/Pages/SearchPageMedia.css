@@ -52,6 +52,9 @@
             p{
                 font-size:.6rem;
             }
+            .short-desc{
+                display:none;
+            }
         }
     }
 }

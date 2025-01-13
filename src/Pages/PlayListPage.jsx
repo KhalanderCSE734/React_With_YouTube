@@ -9,10 +9,7 @@ import { IoIosShareAlt } from "react-icons/io";
 import { MdOutlineFileDownload } from "react-icons/md";
 
 
-import './Video.css';
-import './VideoMedia.css';
-
-
+import './SearchPage.css';
 
 /*
 &hellip;      '...' three horizontal dots
@@ -22,11 +19,20 @@ import './VideoMedia.css';
 
 
 
+/*
+
+https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${content}&maxResults=50&key=${key}&pageToken=${token}
+
+
+*/
+
+
+
 
  
 const Video = () => {
 
-  const {region,categoryId,videoId,channelId} = useParams();
+  const {videoId,PlyaListId} = useParams();
 
   // const [data,setData] = useState([]);
   // console.log(categoryId,videoId);
@@ -61,18 +67,14 @@ const Video = () => {
 
   const getComments = async (pageToken="")=>{
     try{
-      // let commentURL = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}&pageToken=${pageToken}`
-      let commentURL = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}`;
+      let commentURL = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}&pageToken=${pageToken}`
       const response = await fetch(commentURL);
       const responseData = await response.json();
       // console.log("Comment Details \n",responseData); 
       // console.log("Comment Details \n",responseData.items); 
       // setComment(responseData);
       // setComment(responseData.items);
-      if(responseData && !('error' in responseData)){
-        setComment((prev)=>{ return [...prev,...responseData.items] });
-        console.log("Comment Details \n",responseData);
-      }
+      setComment((prev)=>{ return [...prev,...responseData.items] });
       const nextPageToken = responseData.nextPageToken;
       // console.log(nextPageToken);
       // if(nextPageToken && comment.length<20){
@@ -90,12 +92,9 @@ const Video = () => {
       let response = await fetch(suggestionURL); 
       let data = await response.json();
       // console.log("Suggestion Video Details \n",data.items);
-      // console.log("Suggestion Video Details \n",data);
       // setSuggestion(data);
       // setSuggestion(data.items); 
-      if(data && !('error' in data)){
-        setSuggestion((prev)=> [...prev,...data.items]); 
-      }
+      setSuggestion((prev)=> [...prev,...data.items]); 
       const nextPageToken = data.nextPageToken;
       if(nextPageToken){
         getSuggestionVideos(nextPageToken);
@@ -224,8 +223,6 @@ const Video = () => {
        <div className="video-container">
 
           <div className="main-video">
-              {/* <video src="/SampleVideo.mp4" width="400px" controls autoPlay> </video> */}
-
               <iframe src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen autoPlay></iframe>
 
               <h1>{video.snippet.title} </h1>
@@ -266,87 +263,28 @@ const Video = () => {
                         <button> Comment </button>
                     </div>
                     {
-                      comment.length!=0 ?
                       comment.map((cur,ind)=>{
                         return(
                           <div className="your-comment people-comment" key={ind}>
                         <img src={cur.snippet.topLevelComment.snippet.authorProfileImageUrl} alt="Profile" />
                         <div className="main-comment">
                           <div className="name"> {cur.snippet.topLevelComment.snippet.authorDisplayName}  ___     {moment(cur.snippet.topLevelComment.snippet.publishedAt).fromNow()}</div>
-                          <p className='h-14 overflow-auto mb-1 mt-1'>{cur.snippet.topLevelComment.snippet.textOriginal}</p>
+                          <p className='h-14 overflow-auto mb-1 mt-1 '>{cur.snippet.topLevelComment.snippet.textOriginal}</p>
                           <div className="like">
                           <AiOutlineLike/>   {cur.snippet.topLevelComment.snippet.likeCount}   <BiDislike/>  Reply
                           </div>
                         </div>
-                        {/* <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div> */}
+                        <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div>
                         </div>
                         )
-                       }):
-                       <h1 className='text-white text-2xl text-center mb-10'> Comments Are Disabled for The Above Video</h1>
+                       })
                     }
-                    {/* <div className="your-comment people-comment">
-                        <img src="/Unkown.png" alt="Profile" />
-                        <div className="main-comment">
-                          <div className="name"> Shailesh 3 months ago</div>
-                          <p>I have watched this video It was really superb thank you so much. </p>
-                          <div className="like">
-                          <AiOutlineLike/>   6.5K   <BiDislike/>  Reply
-                          </div>
-                        </div>
-                        <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div>
-                    </div>
-                    <div className="your-comment people-comment">
-                        <img src="/Unkown.png" alt="Profile" />
-                        <div className="main-comment">
-                          <div className="name"> Shailesh 3 months ago</div>
-                          <p>I have watched this video It was really superb thank you so much. </p>
-                          <div className="like">
-                          <AiOutlineLike/>   6.5K   <BiDislike/>  Reply
-                          </div>
-                        </div>
-                        <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div>
-                    </div>
-                    <div className="your-comment people-comment">
-                        <img src="/Unkown.png" alt="Profile" />
-                        <div className="main-comment">
-                          <div className="name"> Shailesh 3 months ago</div>
-                          <p>I have watched this video It was really superb thank you so much. </p>
-                          <div className="like">
-                          <AiOutlineLike/>   6.5K   <BiDislike/>  Reply
-                          </div>
-                        </div>
-                        <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div>
-                    </div>
-                    <div className="your-comment people-comment">
-                        <img src="/Unkown.png" alt="Profile" />
-                        <div className="main-comment">
-                          <div className="name"> Shailesh 3 months ago</div>
-                          <p>I have watched this video It was really superb thank you so much. </p>
-                          <div className="like">
-                          <AiOutlineLike/>   6.5K   <BiDislike/>  Reply
-                          </div>
-                        </div>
-                        <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div>
-                    </div>
-                    <div className="your-comment people-comment">
-                        <img src="/Unkown.png" alt="Profile" />
-                        <div className="main-comment">
-                          <div className="name"> Shailesh 3 months ago</div>
-                          <p>I have watched this video It was really superb thank you so much. </p>
-                          <div className="like">
-                          <AiOutlineLike/>   6.5K   <BiDislike/>  Reply
-                          </div>
-                        </div>
-                        <div className="horizontal-dot" style={{marginLeft:"10px"}}> &#8285;   </div>
-                    </div> */}
-
               </div>
           </div>
 
           <div className="suggestion-videos">
 
             {
-              suggestion.length!=0 ?
               suggestion.map((cur,ind)=>{
                     return   <NavLink to={`/video/${region}/${cur.snippet.categoryId}/${cur.id}/${cur.snippet.channelId}`} key={ind} className="thumbnail-container">
                     <img src={cur.snippet.thumbnails.medium.url} alt="ShinChan" />
@@ -356,105 +294,9 @@ const Video = () => {
                       <p>{calcCount(cur.statistics.viewCount)} views  &#xB7; <span className="added"> {moment(cur.snippet.publishedAt).fromNow()} </span></p>
                     </div>
                   </NavLink>
-              }):
-              <h1 className='text-red-700 text-3xl'> Suggestion Videos Are Not Available </h1>
+              })
             }
-              {/* <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div> */}
-              {/* <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div>
-              <div className="thumbnail-container">
-                <img src="/Shinchan.png" alt="ShinChan" />
-                <div className="desc">
-                  <h2> Shinchan New Episodes on YouTube | Harry Aur Mixi ke saath Shiro </h2>
-                  <p> Shinchan </p>
-                  <p>878K views  &#xB7; <span className="added"> 1 year ago </span></p>
-                </div>
-              </div> */}
+              
           </div>
 
        </div>
