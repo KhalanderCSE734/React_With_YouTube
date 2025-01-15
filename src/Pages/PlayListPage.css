@@ -17,6 +17,11 @@
         width:100%;
         border-radius:.5rem;
     }
+    video{
+        height:500px;
+        width:100%;
+        border-radius:.5rem; 
+    }
     h1{
         font-size:1.5rem;
     }
@@ -272,6 +277,11 @@
     .main-video iframe{
         height:500px;
     }
+    .main-video video{
+        height:500px;
+        width:100%;
+        border-radius:.5rem; 
+    }
 }
 
 @media (max-width:600px){
@@ -319,6 +329,11 @@
     .main-video iframe{
         height:350px;
     }
+    .main-video  video{
+        height:500px;
+        width:100%;
+        border-radius:.5rem; 
+    }
 }
 @media (max-width:400px){
     .main-video .about-video{
@@ -357,5 +372,10 @@
     }
     .main-video iframe{
         height:350px;
+    }
+    .main-video video{
+        height:500px;
+        width:100%;
+        border-radius:.5rem; 
     }
 }

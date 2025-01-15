@@ -8,6 +8,8 @@ import HeroVideos from './Components/HeroVideos';
 import Home from './Pages/Home';
 import Video from './Pages/Video';
 import SearchPage from './Pages/SearchPage';
+import PlayListPage from './Pages/PlayListPage';
+
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -40,6 +42,7 @@ const App = () => {
           }/>
           <Route path="/video/:region/:categoryId/:videoId/:channelId" element={<Video/>}/>
           <Route path="/search/:query" element={<SearchPage/>}/>
+          <Route path="/playlist/:videoId/:PlayListId/:channelId/:title" element={<PlayListPage/> }/>
       </Routes>
 
     </>

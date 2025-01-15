@@ -61,7 +61,7 @@ const Navbar = ()=>{
         // console.log("Query Searched");
         evt.preventDefault();
         if((search.trim())!==""){
-            console.log(search.trim());
+            // console.log(search.trim());
             goSearch(`/search/${search.trim()}`);
         }
         setSearch("");
